@@ -1,0 +1,19 @@
+<h1> {{ post.headline }} </h1>
+
+<h3>{{ post.text }}</h3><br />
+{{ post.author_id.id }}
+{% if user.id == post.author.id %}
+<a href="{% url 'posts:edit' post.id %}">Edit</a>
+{% endif %}
+
+<form method="POST">{% csrf_token %}
+    {{ form }}
+    <input type="hidden" value="{{ post.id }}" name="post_id" />
+    <input type="submit" value="Submit" />
+</form>
+
+<h4>Comments:</h4>
+{% for comment in post.comment_set.all %}
+<p>{{comment.createdDate }}</p>
+<p>{{ comment.text }}</p><br />
+{% endfor %}

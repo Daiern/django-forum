@@ -1,0 +1,18 @@
+{%extends 'posts/base.html'%}
+
+{% block body %}
+<h1>Awesome Forum</h1>
+
+<a href="{% url 'posts:create' %}">New Post</a>
+
+{% if latest_post_list %}
+    <ul>
+    {% for post in latest_post_list %}
+        <li><a href="{% url 'posts:detail' post.id %}">{{ post.headline }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No posts are available.</p>
+{% endif %}
+
+{% endblock body %}
